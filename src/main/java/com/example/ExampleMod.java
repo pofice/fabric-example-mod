@@ -1,8 +1,11 @@
 package com.example;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -19,9 +22,10 @@ public class ExampleMod implements ModInitializer {
        可以在`Blocks`类中查找所有原版方块，你可以以此作为参考。
     */
 	//public static final Block EXAMPLE_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).hardness(4.0f)); // fabric api 版本 <= 0.77.0
-	public static final Block EXAMPLE_BLOCK  = new Block(FabricBlockSettings.create().strength(4.0f));
+	public static final Block EXAMPLE_BLOCK = new Block(FabricBlockSettings.copyOf(Blocks.HONEY_BLOCK).strength(4.0f));
 	@Override
 	public void onInitialize() {
 		Registry.register(Registries.BLOCK, new Identifier("tutorial", "example_block"), EXAMPLE_BLOCK);
+		Registry.register(Registries.ITEM, new Identifier("tutorial", "example_block"), new BlockItem(EXAMPLE_BLOCK, new FabricItemSettings()));
 	}
 }
